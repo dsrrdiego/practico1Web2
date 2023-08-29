@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a class="links" href="">uno</a>
+    <a class="links" href="">dos</a>
+    <a class="links" href="">tres</a>
+    <a class="links" href="">cuatro</a>
+    <div id="miDiv"></div>    <!-- contenedor a llenar con ajax -->
+</body>
+<script>
+    let links=document.querySelectorAll(".links");
+    for (let i=0;i<links.length;i++) {
+        links[i].addEventListener('click',function(e){
+            e.preventDefault();
+            cargar(i+1);            
+        })
+        
+    }
+
+    async function cargar(id){
+        let miDiv=document.querySelector("#miDiv");
+        try {
+            let promesa =await fetch('arreglo.php?cantidad='+id);
+            if (promesa.ok){
+                let text =await promesa.text();
+                miDiv.innerHTML=text;
+            }
+        }catch(e){
+            miDiv.innerHTML="<h1> hemos tenido un error!! "+e+" </h1>";
+        }
+    }
+
+</script>
+</html>

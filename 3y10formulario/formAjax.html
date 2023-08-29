@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="formAjax.php" method="post" id="miForm">
+        nombre<input type="text" name="nombre">
+        Apellido<input type="text" name="apellido">
+        Edad<input type="text" name="edad">
+        <input type="submit" value="enviar">
+    </form>
+    <div id="miDiv"></div> <!-- el contenedor que va a llenar el ajax -->
+</body>
+
+
+<script>
+    document.querySelector("#miForm").addEventListener('submit', function (e){traer2(e,this)});
+
+
+    // AJAX:     2 sinstaxis distintas para escribir lo mismo 
+
+    // function traer(e, esto){
+    //     e.preventDefault();
+    //     let miDiv=document.querySelector('#miDiv');
+    //     const data = new URLSearchParams(new FormData(esto));
+        
+    //     miDiv.innerHTML="Cargando";
+    //     fetch('miserver.php', {
+    //         method: 'post',
+    //         body: data,
+    //     })
+    //     .then(response => response.text()) // el servidor nos devuelve HTML
+    //     .then(html => {
+    //     miDiv.innerHTML = html; // volcamos el contenido html en nuestro Div
+    // })
+    // .catch(error => console.log(error));
+
+    // }
+
+    async function traer2 (e, esto){
+        e.preventDefault();
+        let miDiv=document.querySelector('#miDiv');
+        const data = new URLSearchParams(new FormData(esto));
+        
+        miDiv.innerHTML="Cargando";
+        try {
+            let promesa= await fetch('miserver.php', {
+                method: 'post',
+                body: data,
+            });
+
+            if (promesa.ok){
+                let texto= await promesa.text();
+                miDiv.innerHTML = texto; // volcamos el contenido html en nuestro Div
+            }
+        }catch(e){
+            miDiv.innerHTML="<h1> hemos tenido un error!! "+e+" </h1>";
+        }
+    }
+
+</script>
+</html>

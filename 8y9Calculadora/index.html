@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="calculadora.php?mostrar=pi">PI</a>
+    <a href="calculadora.php?developer=about">About</a>
+    <form action="calculadora.php" method="get">
+        numero 1 <input type="number" name="num1">
+        numero 2 <input type="number" name="num2">
+   
+        <!-- opcion 1: texto -->
+        <!-- operacion <input type="text" name="operacion"> -->
+        
+        <!-- opcion 2: radio buttons 
+        <input type="radio" name="signo" id="" value="+" checked>+
+        <input type="radio" name="signo" id="" value="*">*
+        <input type="radio" name="signo" id="" value="/">/
+        <input type="radio" name="signo" id="" value="-">-
+         -->
+
+         <!-- opcion 3: selecto -->
+        <select name="signo" id="">
+            <option value="+">Sumar</option>
+            <option value="-">Restar</option>
+            <option value="/">Dividir</option>
+            <option value="*">Multiplicar</option>
+            
+        </select>
+
+        <input type="checkbox" name="check1" id="">mostrar?     
+        <input type="checkbox" name="check2" id="">mandarMail?     
+        
+        <input type="submit" value="enviar">
+    
+    </form>
+    
+</body>
+</html>
